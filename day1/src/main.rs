@@ -21,8 +21,6 @@ fn main() {
         }
     }
 
-    let most_calories: i32 = elves_calories.pop().unwrap();
-    let calories_top_3: i32 = most_calories + elves_calories.pop().unwrap() + elves_calories.pop().unwrap();
-    println!("The most calories one elve has: {}", most_calories);
-    println!("The calories the 3 elves with the most have: {}", calories_top_3)
+    println!("Solution 1: {}", elves_calories.iter().take(1).sum::<i32>());
+    println!("Solution 2: {}", elves_calories.iter().take(3).sum::<i32>());
 }
