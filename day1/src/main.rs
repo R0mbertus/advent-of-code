@@ -1,5 +1,6 @@
 use std::fs::File;
 use std::io::{BufRead, BufReader};
+use std::collections::BinaryHeap;
 
 fn main() {
     let file = File::open("input.txt").unwrap();
@@ -8,21 +9,20 @@ fn main() {
         .flatten()
         .collect();
     
-    let mut elve_max: (i32, i32) = (0, 0);
+    let mut elves_calories: BinaryHeap<i32> = BinaryHeap::new();
     let mut sum: i32 = 0;
-    let mut elve_num: i32 = 1;
     for line in lines.iter() {
         match line.parse::<i32>() {
             Ok(num) => sum += num,
             Err(_e) => {
-                if sum > elve_max.1 {
-                    elve_max = (elve_num, sum);
-                }
+                elves_calories.push(sum);
                 sum = 0;
-                elve_num += 1;
             },
         }
     }
 
-    println!("Elve {} has the most calories: {}", elve_max.0, elve_max.1);
+    let most_calories: i32 = elves_calories.pop().unwrap();
+    let calories_top_3: i32 = most_calories + elves_calories.pop().unwrap() + elves_calories.pop().unwrap();
+    println!("The most calories one elve has: {}", most_calories);
+    println!("The calories the 3 elves with the most have: {}", calories_top_3)
 }
