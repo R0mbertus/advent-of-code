@@ -2,12 +2,12 @@
 My solutions to the [Advent of Code 2022](https://adventofcode.com/2022) done in Rust.
 
 ## Project workings
-This is the first time I'm using Rust so the setup will be messy for most.  
+This is the first time I'm using Rust so the setup and style wont be the best.  
 To run the code of a day do `cargo build --release` and then `cargo run --release {number_of_day}`.
 
 ## Awnsers
 List of each day with the awnsers and the run time of each part.  
-**SPOILER ALERT**, the awnser for a day is listed in the collapsed 'Awnsers' section.
+**SPOILER ALERT**, the awnsers for a day is listed in the collapsed 'Awnsers' section.
 
 ### *Day 1*
 <details><summary>Awnsers</summary><p>
