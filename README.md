@@ -17,8 +17,8 @@ List of each day with the awnsers and the run time of each part.
 </p></details>
 <details><summary>Times</summary><p>
 
-1. 0.2884 ms
-2. 0.2422 ms
+1. 0.2131 ms
+2. 0.1773 ms
 </p></details>
 
 ### *Day 2*
