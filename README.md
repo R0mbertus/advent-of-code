@@ -20,3 +20,15 @@ List of each day with the awnsers and the run time of each part.
 1. 0.2884 ms
 2. 0.2422 ms
 </p></details>
+
+### *Day 2*
+<details><summary>Awnsers</summary><p>
+
+1. 9241
+2. 14610
+</p></details>
+<details><summary>Times</summary><p>
+
+1. 0.0616 ms
+2. 0.0529 ms
+</p></details>
