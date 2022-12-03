@@ -30,7 +30,7 @@ fn get_day_solver(day: u8) -> (fn(), fn()) {
     match day {
         1   => (day1::solve1, day1::solve2),
         2   => (day2::solve1, day2::solve2),
-        3   => (day3::solve1, day3::solve1),
+        3   => (day3::solve1, day3::solve2),
         _   => unimplemented!(),
     }
 }
