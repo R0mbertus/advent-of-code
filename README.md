@@ -5,12 +5,12 @@ My solutions to the [Advent of Code 2022](https://adventofcode.com/2022) done in
 This is the first time I'm using Rust so the setup and style wont be the best.  
 To run the code of a day do `cargo build --release` and then `cargo run --release {number_of_day}`.
 
-## Awnsers
-List of each day with the awnsers and the run time of each part.  
-**SPOILER ALERT**, the awnsers for a day is listed in the collapsed 'Awnsers' section.
+## Answers
+List of each day with the Answers and the run time of each part.  
+**SPOILER ALERT**, the Answers for a day is listed in the collapsed 'Answers' section.
 
 ### *Day 1*
-<details><summary>Awnsers</summary><p>
+<details><summary>Answers</summary><p>
 
 1. 72240
 2. 208622
@@ -22,7 +22,7 @@ List of each day with the awnsers and the run time of each part.
 </p></details>
 
 ### *Day 2*
-<details><summary>Awnsers</summary><p>
+<details><summary>Answers</summary><p>
 
 1. 9241
 2. 14610
@@ -33,8 +33,8 @@ List of each day with the awnsers and the run time of each part.
 2. 0.0529 ms
 </p></details>
 
-### *Day 2*
-<details><summary>Awnsers</summary><p>
+### *Day 3*
+<details><summary>Answers</summary><p>
 
 1. 7824
 2. 2798
