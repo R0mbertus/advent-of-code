@@ -16,7 +16,7 @@ fn priority(c: u8)-> u32 {
 }
 
 pub fn solve1() {
-    let priority_total: u32 = read_to_string("src/days/input/input3.txt")
+    let priority_total: u32 = read_to_string("src/days/input/3.txt")
         .unwrap()
         .as_str()
         .lines()
@@ -31,10 +31,10 @@ pub fn solve1() {
 }
 
 pub fn solve2() {
-    let priority_total: u32 = read_to_string("src/days/input/input3.txt")
+    let priority_total: u32 = read_to_string("src/days/input/3.txt")
         .unwrap()
         .as_str()
-        .split("\n")
+        .lines()
         .collect::<Vec<&str>>()
         .chunks(3)
         .map(|s| {

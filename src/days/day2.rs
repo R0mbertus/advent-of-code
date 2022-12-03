@@ -1,10 +1,9 @@
 use std::fs::read_to_string;
 
 pub fn solve1() {
-    let points_total: i32 = read_to_string("src/days/input/input2.txt")
+    let points_total: u32 = read_to_string("src/days/input/2.txt")
         .unwrap()
-        .as_str()
-        .split("\n")
+        .lines()
         .map(|s| {
             match s {
                 "A X" => 4,
@@ -25,10 +24,9 @@ pub fn solve1() {
 }
 
 pub fn solve2() {
-    let points_total: i32 = read_to_string("src/days/input/input2.txt")
+    let points_total: u32 = read_to_string("src/days/input/2.txt")
         .unwrap()
-        .as_str()
-        .split("\n")
+        .lines()
         .map(|s| {
             match s {
                 "A X" => 3,

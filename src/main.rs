@@ -10,7 +10,7 @@ fn main() {
         panic!("Incorrect format, run as: 'cargo run [day number]'");
     }
 
-    let day: u8 = args[1].parse::<u8>().unwrap();
+    let day = args[1].parse::<u8>().unwrap();
     let (part1, part2) = get_day_solver(day);
 
     println!("\n=== Day {:02} ===", day);
