@@ -10,7 +10,7 @@ List of each day with the awnsers and the run time of each part.
 **SPOILER ALERT**, the awnsers for a day is listed in the collapsed 'Awnsers' section.
 
 ### *Day 1*
-<details><summary>Awnsers</summary><p>
+<details><summary>Answers</summary><p>
 
 1. 72240
 2. 208622
@@ -22,7 +22,7 @@ List of each day with the awnsers and the run time of each part.
 </p></details>
 
 ### *Day 2*
-<details><summary>Awnsers</summary><p>
+<details><summary>Answers</summary><p>
 
 1. 9241
 2. 14610
@@ -34,7 +34,7 @@ List of each day with the awnsers and the run time of each part.
 </p></details>
 
 ### *Day 3*
-<details><summary>Awnsers</summary><p>
+<details><summary>Answers</summary><p>
 
 1. 7824
 2. 2798
