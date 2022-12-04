@@ -3,7 +3,8 @@ My solutions to the [Advent of Code 2022](https://adventofcode.com/2022) done in
 
 ## Project workings
 This is the first time I'm using Rust so the setup and style wont be the best.  
-To run the code of a day do `cargo build --release` and then `cargo run --release {number_of_day}`.
+To run the code of a day do `cargo run --release {number_of_day}`.  
+Proper benchmarks will be added later on
 
 ## Answers
 List of each day with the Answers and the run time of each part.  
