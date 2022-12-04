@@ -44,3 +44,15 @@ List of each day with the Answers and the run time of each part.
 1. 0.0916 ms
 2. 0.1042 ms
 </p></details>
+
+### *Day 4*
+<details><summary>Answers</summary><p>
+
+1. 567
+2. 907
+</p></details>
+<details><summary>Times</summary><p>
+
+1. 0.2425 ms
+2. 0.2483 ms
+</p></details>
