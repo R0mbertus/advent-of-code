@@ -57,3 +57,15 @@ List of each day with the Answers and the run time of each part.
 1. 0.2425 ms
 2. 0.2483 ms
 </p></details>
+
+### *Day 5*
+<details><summary>Answers</summary><p>
+
+1. ZSQVCCJLL
+2. QZFJRWHGS
+</p></details>
+<details><summary>Times</summary><p>
+
+1. 0.0893 ms
+2. 0.0988 ms
+</p></details>
