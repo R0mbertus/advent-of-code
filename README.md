@@ -69,3 +69,15 @@ List of each day with the Answers and the run time of each part.
 1. 0.0893 ms
 2. 0.0988 ms
 </p></details>
+
+### *Day 6*
+<details><summary>Answers</summary><p>
+
+1. 1816
+2. 2625
+</p></details>
+<details><summary>Times</summary><p>
+
+1. 0.0799 ms
+2. 0.4402 ms
+</p></details>
