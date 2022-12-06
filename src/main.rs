@@ -1,6 +1,6 @@
 mod days;
 
-use days::{day1, day2, day3, day4, day5, day6};
+use days::{day1, day2, day3, day4, day5, day6, day7};
 use std::time::Instant;
 use std::env;
 
@@ -34,6 +34,7 @@ fn get_day_solver(day: u8) -> (fn(), fn()) {
         4   => (day4::solve1, day4::solve2),
         5   => (day5::solve1, day5::solve2),
         6   => (day6::solve1, day6::solve2),
+        7   => (day7::solve1, day7::solve2),
         _   => unimplemented!(),
     }
 }
