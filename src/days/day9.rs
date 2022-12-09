@@ -49,8 +49,24 @@ pub fn solve1() {
 }
 
 pub fn solve2() {
-    let temp = read_to_string("src/days/input/9.txt")
+    let path = read_to_string("src/days/input/9.txt")
         .unwrap();
 
-    //println!("  Part 2: {}", temp);
+    let mut pos: Vec<(i32, i32)> = vec![(0,0)];
+    let mut knots = vec![(0,0); 10];
+
+    path
+        .lines()
+        .for_each(|d| {
+            let (dir, times) = d.split_once(" ").unwrap();
+            for _ in 0..times.parse::<u8>().unwrap() {
+                knots[0] = get_h_pos(dir, knots[0]);
+                for i in 1..10 {
+                    knots[i] = get_t_pos(knots[i], knots[i - 1]);
+                }
+                pos.push(knots[9]);
+            }
+        });
+
+    println!("  Part 2: {}", pos.into_iter().sorted().dedup().count());
 }

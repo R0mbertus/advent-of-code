@@ -105,3 +105,15 @@ List of each day with the Answers and the run time of each part.
 1. 0.1069 ms
 2. 0.2920 ms
 </p></details>
+
+### *Day 9*
+<details><summary>Answers</summary><p>
+
+1. 6332
+2. 2511
+</p></details>
+<details><summary>Times</summary><p>
+
+1. 0.5599 ms
+2. 0.9326 ms
+</p></details>
