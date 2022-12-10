@@ -26,14 +26,23 @@ pub fn solve2() {
         .unwrap()
         .replace("addx ", "noop\n");
 
-    let mut x_total: i32 = 1;
-    let mut crt: Vec<Vec<char>> = vec![vec!['.'; 40]; 6];
+    let mut sprite: Vec<i32> = vec![-1, 0, 1];
 
+    print!("  Part 2:");
     for (clock, operation) in signals.lines().enumerate() {
         if operation != "noop" {
-            x_total += operation.parse::<i32>().unwrap();
+            let val_to_add = operation.parse::<i32>().unwrap();
+            sprite = sprite.iter().map(|p| *p + val_to_add).collect();
+        }
+        if clock % 40 == 0 {
+            print!("\n");
+        }
+        if sprite.contains(&((clock as i32) % 40)) {
+            print!("#");
+        }
+        else {
+            print!(".");
         }
     }
-
-    println!("  Part 2: {}", interesting_total);
+    print!("\n");
 }
