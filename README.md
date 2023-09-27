@@ -137,3 +137,16 @@ List of each day with the Answers and the run time of each part.
 1. 0.0232 ms
 2. 0.0332 ms
 </p></details>
+
+
+### *Day 11*
+<details><summary>Answers</summary><p>
+
+1. 78678
+2. 15333249714
+</p></details>
+<details><summary>Times</summary><p>
+
+1. 0.0518 ms
+2. 12.2039 ms
+</p></details>
