@@ -6,7 +6,7 @@ edition = "2021"
 
 [lib]
 name = "aoc_2023"
-path = "src/lib.rs"
+path = "aoc-2023/lib.rs"
 
 [dependencies]
 aoc-runner = "0.3.0"
