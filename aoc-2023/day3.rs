@@ -4,7 +4,10 @@ use std::collections::HashMap;
 
 #[aoc_generator(day3)]
 fn parse(input: &str) -> HashMap<(usize, usize), (char, Vec<u32>)> {
-    let grid = input.lines().map(|l| l.chars().collect()).collect();
+    let grid = input
+        .lines()
+        .map(|l| l.chars().collect())
+        .collect::<Vec<Vec<char>>>();
 
     let reg = Regex::new(r"\d+").unwrap();
 
@@ -31,10 +34,7 @@ fn parse(input: &str) -> HashMap<(usize, usize), (char, Vec<u32>)> {
     symbols_numbers
 }
 
-fn symbol_around(
-    grid: &Vec<Vec<char>>,
-    num: (usize, usize, u32),
-) -> Option<((usize, usize), char)> {
+fn symbol_around(grid: &[Vec<char>], num: (usize, usize, u32)) -> Option<((usize, usize), char)> {
     let mut condition = num.2;
     let mut pos = (num.0, num.1);
     while condition != 0 {
@@ -50,12 +50,13 @@ fn symbol_around(
             (1, 1),
         ] {
             let (new_x, new_y) = (pos.0 as i32 - neigbor.0, pos.1 as i32 - neigbor.1);
+            #[allow(clippy::all)]
             let character = grid
                 .get(new_y as usize)
                 .and_then(|l| Some(l.get(new_x as usize)))
                 .unwrap_or(None);
             if let Some(symbol) = character {
-                if *symbol != '.' && !symbol.is_digit(10) {
+                if *symbol != '.' && !symbol.is_ascii_digit() {
                     return Some(((new_x as usize, new_y as usize), *symbol));
                 }
             }

@@ -23,7 +23,7 @@ fn parse(input: &str) -> Vec<(Vec<u32>, Vec<u32>)> {
 }
 
 #[aoc(day4, part1)]
-fn part1(input: &Vec<(Vec<u32>, Vec<u32>)>) -> u32 {
+fn part1(input: &[(Vec<u32>, Vec<u32>)]) -> u32 {
     input
         .iter()
         .map(|l| {
@@ -40,7 +40,7 @@ fn part1(input: &Vec<(Vec<u32>, Vec<u32>)>) -> u32 {
 }
 
 #[aoc(day4, part2)]
-fn part2(input: &Vec<(Vec<u32>, Vec<u32>)>) -> u32 {
+fn part2(input: &[(Vec<u32>, Vec<u32>)]) -> u32 {
     let winnings: Vec<u32> = input
         .iter()
         .map(|l| {

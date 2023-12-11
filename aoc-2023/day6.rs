@@ -2,7 +2,7 @@ use aoc_runner_derive::{aoc, aoc_generator};
 
 #[aoc_generator(day6)]
 fn parse(input: &str) -> Vec<(u64, u64)> {
-    let (durations, distances) = input.split_once("\n").unwrap();
+    let (durations, distances) = input.split_once('\n').unwrap();
     durations
         .split_whitespace()
         .filter_map(|d| d.parse::<u64>().ok())
@@ -28,7 +28,7 @@ fn part1(input: &Vec<(u64, u64)>) -> usize {
 }
 
 #[aoc(day6, part2)]
-fn part2(input: &Vec<(u64, u64)>) -> usize {
+fn part2(input: &[(u64, u64)]) -> usize {
     let duration = input
         .iter()
         .map(|(t, _)| t.to_string())

@@ -15,7 +15,7 @@ fn parse(input: &str) -> Vec<Game> {
             let (_, data) = s.split_once(": ").unwrap();
             let colors = data
                 .split(|p| p == ';' || p == ',')
-                .map(|cube| cube.trim().split_once(" ").unwrap())
+                .map(|cube| cube.trim().split_once(' ').unwrap())
                 .fold(HashMap::new(), |mut colors, (count, color)| {
                     colors
                         .entry(color)
@@ -34,7 +34,7 @@ fn parse(input: &str) -> Vec<Game> {
 }
 
 #[aoc(day2, part1)]
-fn part1(input: &Vec<Game>) -> i32 {
+fn part1(input: &[Game]) -> i32 {
     input
         .iter()
         .enumerate()
@@ -44,7 +44,7 @@ fn part1(input: &Vec<Game>) -> i32 {
 }
 
 #[aoc(day2, part2)]
-fn part2(input: &Vec<Game>) -> i32 {
+fn part2(input: &[Game]) -> i32 {
     input
         .iter()
         .map(|game| game.red * game.green * game.blue)

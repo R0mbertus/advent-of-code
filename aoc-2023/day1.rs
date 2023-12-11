@@ -6,11 +6,11 @@ fn parse1(input: &str) -> Vec<u32> {
         .split_whitespace()
         .collect::<Vec<&str>>()
         .iter()
-        .map(|r| r.chars().filter(|c| c.is_digit(10)).collect::<String>())
+        .map(|r| r.chars().filter(|c| c.is_ascii_digit()).collect::<String>())
         .map(|s| {
             let first = s.chars().clone().next().unwrap();
             let last = s.chars().last().unwrap();
-            if s.len() < 1 {
+            if s.is_empty() {
                 first.to_digit(10).unwrap()
             } else {
                 format!("{}{}", first, last).parse().unwrap()
@@ -42,12 +42,12 @@ fn parse2(input: &str) -> Vec<u32> {
 }
 
 #[aoc(day1, part1)]
-fn part1(input: &Vec<u32>) -> u32 {
+fn part1(input: &[u32]) -> u32 {
     input.iter().sum()
 }
 
 #[aoc(day1, part2)]
-fn part2(input: &Vec<u32>) -> u32 {
+fn part2(input: &[u32]) -> u32 {
     input.iter().sum()
 }
 

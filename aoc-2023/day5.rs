@@ -13,7 +13,7 @@ fn parse(input: &str) -> (Vec<i64>, Vec<Vec<Vec<i64>>>) {
     let mappings = mappings_str
         .split("\n\n")
         .map(|b| {
-            b.split("\n")
+            b.split('\n')
                 .map(|l| {
                     reg.find_iter(l)
                         .map(|m| m.as_str().parse::<i64>().unwrap())

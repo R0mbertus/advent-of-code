@@ -62,6 +62,7 @@ fn compare(a: &(Vec<char>, u64), b: &(Vec<char>, u64), joker: bool) -> std::cmp:
     let b_values = b_freqs.values_mut().sorted().rev().collect_vec();
 
     for (a_max, b_max) in a_values.into_iter().zip(b_values) {
+        #[allow(clippy::all)]
         if a_max > b_max {
             return Ordering::Greater;
         } else if b_max > a_max {
@@ -74,6 +75,8 @@ fn compare(a: &(Vec<char>, u64), b: &(Vec<char>, u64), joker: bool) -> std::cmp:
             CARDS.iter().position(|c| c == a_card).unwrap(),
             CARDS.iter().position(|c| c == b_card).unwrap(),
         );
+
+        #[allow(clippy::all)]
         if a_pos < b_pos {
             return Ordering::Greater;
         } else if b_pos < a_pos {
@@ -85,8 +88,8 @@ fn compare(a: &(Vec<char>, u64), b: &(Vec<char>, u64), joker: bool) -> std::cmp:
 }
 
 #[aoc(day7, part1)]
-fn part1(input: &Vec<(Vec<char>, u64)>) -> u64 {
-    let mut values = input.clone();
+fn part1(input: &[(Vec<char>, u64)]) -> u64 {
+    let mut values = input.to_owned();
     values.sort_by(|a, b| compare(a, b, false));
 
     let mut total = 0;
@@ -97,8 +100,8 @@ fn part1(input: &Vec<(Vec<char>, u64)>) -> u64 {
 }
 
 #[aoc(day7, part2)]
-fn part2(input: &Vec<(Vec<char>, u64)>) -> u64 {
-    let mut values = input.clone();
+fn part2(input: &[(Vec<char>, u64)]) -> u64 {
+    let mut values = input.to_owned();
     values.sort_by(|a, b| compare(a, b, true));
 
     let mut total = 0;
