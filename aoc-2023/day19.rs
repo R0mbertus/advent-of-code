@@ -119,7 +119,7 @@ fn part1(input: &(HashMap<String, Vec<Rule>>, Vec<Rating>)) -> usize {
 }
 
 #[aoc(day19, part2)]
-fn part2(input: &(HashMap<String, Vec<Rule>>, Vec<Rating>)) -> usize {
+fn part2(_input: &(HashMap<String, Vec<Rule>>, Vec<Rating>)) -> usize {
     todo!()
 }
 
