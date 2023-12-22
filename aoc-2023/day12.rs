@@ -1,14 +1,15 @@
-use std::collections::HashMap;
-
 use aoc_runner_derive::{aoc, aoc_generator};
 use itertools::Itertools;
+use std::collections::HashMap;
+
+type CacheKey = (Vec<char>, Vec<usize>, usize, usize, usize);
 
 #[aoc_generator(day12)]
 fn parse(input: &str) -> Vec<(Vec<char>, Vec<usize>)> {
     input
         .lines()
         .map(|l| {
-            let (springs, nums) = l.split_once(" ").unwrap();
+            let (springs, nums) = l.split_once(' ').unwrap();
             (
                 springs.chars().collect::<Vec<char>>(),
                 nums.split(',').map(|n| n.parse().unwrap()).collect(),
@@ -18,7 +19,7 @@ fn parse(input: &str) -> Vec<(Vec<char>, Vec<usize>)> {
 }
 
 fn posibilities(
-    cache: &mut HashMap<(Vec<char>, Vec<usize>, usize, usize, usize), usize>,
+    cache: &mut HashMap<CacheKey, usize>,
     springs: &[char],
     spring_i: usize,
     nums: &[usize],
@@ -58,10 +59,10 @@ fn posibilities(
 }
 
 #[aoc(day12, part1)]
-fn part1(input: &Vec<(Vec<char>, Vec<usize>)>) -> usize {
+fn part1(input: &[(Vec<char>, Vec<usize>)]) -> usize {
     let mut cache = HashMap::new();
     input
-        .into_iter()
+        .iter()
         .map(|l| {
             let mut springs = l.0.clone();
             springs.push('.');
@@ -71,10 +72,10 @@ fn part1(input: &Vec<(Vec<char>, Vec<usize>)>) -> usize {
 }
 
 #[aoc(day12, part2)]
-fn part2(input: &Vec<(Vec<char>, Vec<usize>)>) -> usize {
+fn part2(input: &[(Vec<char>, Vec<usize>)]) -> usize {
     let mut cache = HashMap::new();
     input
-        .into_iter()
+        .iter()
         .map(|l| {
             let mut springs = (0..5)
                 .map(|_| l.0.iter().collect::<String>())

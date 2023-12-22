@@ -11,14 +11,30 @@ fn parse(input: &str) -> Vec<(Vec<usize>, Vec<usize>)> {
         }
         buf
     };
-    
-    input.split("\n\n").map(|b| {
-        let array = Array2D::from_rows(&b.lines().map(|l| l.chars().collect::<Vec<char>>()).collect::<Vec<Vec<char>>>()).unwrap();
-        (
-            array.as_rows().into_iter().map(|r| to_usize(r)).collect::<Vec<usize>>(), 
-            array.as_columns().into_iter().map(|r| to_usize(r)).collect::<Vec<usize>>()
-        )
-    }).collect()
+
+    input
+        .split("\n\n")
+        .map(|b| {
+            let array = Array2D::from_rows(
+                &b.lines()
+                    .map(|l| l.chars().collect::<Vec<char>>())
+                    .collect::<Vec<Vec<char>>>(),
+            )
+            .unwrap();
+            (
+                array
+                    .as_rows()
+                    .into_iter()
+                    .map(to_usize)
+                    .collect::<Vec<usize>>(),
+                array
+                    .as_columns()
+                    .into_iter()
+                    .map(to_usize)
+                    .collect::<Vec<usize>>(),
+            )
+        })
+        .collect()
 }
 
 fn reflect(elements: &[usize], part2: bool) -> Option<usize> {
@@ -47,26 +63,31 @@ fn reflect(elements: &[usize], part2: bool) -> Option<usize> {
 
 #[aoc(day13, part1)]
 fn part1(input: &[(Vec<usize>, Vec<usize>)]) -> usize {
-    input.iter().map(|(r, c)| {
-        if let Some(value) = reflect(c, false) {
-            value
-        } else {
-            reflect(r, false).unwrap_or(0) * 100
-        }
-    }).sum()
+    input
+        .iter()
+        .map(|(r, c)| {
+            if let Some(value) = reflect(c, false) {
+                value
+            } else {
+                reflect(r, false).unwrap_or(0) * 100
+            }
+        })
+        .sum()
 }
 
 #[aoc(day13, part2)]
 fn part2(input: &[(Vec<usize>, Vec<usize>)]) -> usize {
-    input.iter().map(|(r, c)| {
-        if let Some(value) = reflect(c, true) {
-            value
-        } else {
-            reflect(r, true).unwrap_or(0) * 100
-        }
-    }).sum()
+    input
+        .iter()
+        .map(|(r, c)| {
+            if let Some(value) = reflect(c, true) {
+                value
+            } else {
+                reflect(r, true).unwrap_or(0) * 100
+            }
+        })
+        .sum()
 }
-
 
 #[cfg(test)]
 mod tests {

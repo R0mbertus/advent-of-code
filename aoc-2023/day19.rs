@@ -57,11 +57,9 @@ fn parse(input: &str) -> (HashMap<String, Vec<Rule>>, Vec<Rating>) {
                 .map(|c| {
                     if c.len() > 4 {
                         Rule {
-                            input: c.chars().nth(0).unwrap(),
+                            input: c.chars().next().unwrap(),
                             ordering: c.chars().nth(1).unwrap(),
-                            treshold: c[2..(c.find(':').unwrap() as usize)]
-                                .parse::<usize>()
-                                .unwrap(),
+                            treshold: c[2..c.find(':').unwrap()].parse::<usize>().unwrap(),
                             destination: c[c.find(':').unwrap() + 1..].to_string(),
                         }
                     } else {
@@ -103,7 +101,7 @@ fn part1(input: &(HashMap<String, Vec<Rule>>, Vec<Rating>)) -> usize {
         .filter_map(|r| {
             let mut workflow = input.0.get("in").unwrap().iter();
             while let Some(rule) = workflow.next() {
-                if let Some(res) = rule.compare(&r) {
+                if let Some(res) = rule.compare(r) {
                     match res.as_str() {
                         "A" => return Some(r.sum()),
                         "R" => return None,

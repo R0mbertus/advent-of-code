@@ -52,7 +52,7 @@ fn part2(input: &[(Vec<u32>, Vec<u32>)]) -> u32 {
 
     let mut cards = vec![1; winnings.len()];
 
-    for (i, winning) in winnings.clone().into_iter().enumerate() {
+    for (i, winning) in winnings.into_iter().enumerate() {
         if winning > 0 {
             for j in (i + 1)..(cards.len()).min(i + winning as usize + 1) {
                 cards[j] += cards[i];

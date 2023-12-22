@@ -6,13 +6,13 @@ fn parse1(input: &str) -> Vec<Vec<u8>> {
     input.split(',').map(|s| s.as_bytes().to_vec()).collect()
 }
 
-fn hash(v: &Vec<u8>) -> usize {
+fn hash(v: &[u8]) -> usize {
     v.iter().fold(0, |acc, c| ((acc + *c as usize) * 17) % 256)
 }
 
 #[aoc(day15, part1)]
 fn part1(input: &[Vec<u8>]) -> usize {
-    input.iter().map(hash).sum()
+    input.iter().map(|v| hash(v)).sum()
 }
 
 #[aoc_generator(day15, part2)]
@@ -24,12 +24,22 @@ fn parse2(input: &str) -> Vec<String> {
 fn part2(input: &[String]) -> usize {
     let mut hashmap = vec![IndexMap::new(); 256];
     for s in input {
-        let box_entry = |key: &&str| hash(&key.as_bytes().to_vec());
-        match s.trim_end_matches('-').split('=').collect::<Vec<&str>>().as_slice() {
+        let box_entry = |key: &&str| hash(key.as_bytes());
+        match s
+            .trim_end_matches('-')
+            .split('=')
+            .collect::<Vec<&str>>()
+            .as_slice()
+        {
             [key, value] => {
-                hashmap[box_entry(key)].entry(*key).and_modify(|e| *e = value.parse::<usize>().unwrap()).or_insert(value.parse::<usize>().unwrap());
-            },
-            [key] => {hashmap[box_entry(key)].shift_remove_entry(*key);},
+                hashmap[box_entry(key)]
+                    .entry(*key)
+                    .and_modify(|e| *e = value.parse::<usize>().unwrap())
+                    .or_insert(value.parse::<usize>().unwrap());
+            }
+            [key] => {
+                hashmap[box_entry(key)].shift_remove_entry(*key);
+            }
             _ => {}
         }
     }
@@ -42,7 +52,6 @@ fn part2(input: &[String]) -> usize {
     }
     total
 }
-
 
 #[cfg(test)]
 mod tests {

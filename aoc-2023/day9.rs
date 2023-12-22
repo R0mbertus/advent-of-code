@@ -11,7 +11,7 @@ fn parse(input: &str) -> Vec<Vec<Vec<i64>>> {
                 .collect::<Vec<i64>>()
         })
         .map(|l| {
-            let mut history = vec![(l.clone())];
+            let mut history = vec![(l)];
             while history.last().unwrap().iter().any(|n| *n != 0) {
                 history.push(
                     history
