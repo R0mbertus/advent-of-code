@@ -2,6 +2,8 @@ use aoc_runner_derive::{aoc, aoc_generator};
 use pathfinding::directed::dijkstra::dijkstra;
 use std::ops::Add;
 
+type SuccessorsVec = ((Pos, (i64, i64), usize), u32);
+
 #[derive(PartialEq, Eq, Clone, Copy, Hash)]
 struct Pos(i64, i64);
 
@@ -21,7 +23,7 @@ impl Pos {
         min_len: usize,
         max_len: usize,
         cities: &Vec<Vec<u32>>,
-    ) -> Vec<((Self, (i64, i64), usize), u32)> {
+    ) -> Vec<SuccessorsVec> {
         let mut successors = vec![];
         let mut add_successor = |p: Pos, d: (i64, i64), l: usize| {
             if p.0 >= 0 && p.1 >= 0 && p.0 < cities.len() as i64 && p.1 < cities[0].len() as i64 {
@@ -53,7 +55,7 @@ fn parse(input: &str) -> Vec<Vec<u32>> {
 fn part1(input: &Vec<Vec<u32>>) -> u32 {
     dijkstra(
         &(Pos(0, 0), (0, 1), 0),
-        |&(pos, dir, current_len)| pos.successors(dir, current_len, 1, 3, &input),
+        |&(pos, dir, current_len)| pos.successors(dir, current_len, 1, 3, input),
         |&(p, _, _)| p == Pos(input.len() as i64 - 1, input[0].len() as i64 - 1),
     )
     .unwrap()
@@ -64,7 +66,7 @@ fn part1(input: &Vec<Vec<u32>>) -> u32 {
 fn part2(input: &Vec<Vec<u32>>) -> u32 {
     dijkstra(
         &(Pos(0, 0), (0, 1), 0),
-        |&(pos, dir, current_len)| pos.successors(dir, current_len, 4, 10, &input),
+        |&(pos, dir, current_len)| pos.successors(dir, current_len, 4, 10, input),
         |&(p, _, _)| p == Pos(input.len() as i64 - 1, input[0].len() as i64 - 1),
     )
     .unwrap()
