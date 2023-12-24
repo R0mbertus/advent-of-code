@@ -17,39 +17,55 @@ fn parse(input: &str) -> (Vec<Vec<char>>, (i64, i64)) {
     (garden, start)
 }
 
-#[aoc(day21, part1)]
-fn part1(input: &(Vec<Vec<char>>, (i64, i64))) -> usize {
+fn calculate_spots(input: &(Vec<Vec<char>>, (i64, i64)), max_steps: usize) -> usize {
     let mut reachable = HashSet::new();
     let mut seen = HashSet::new();
-    let mut dequeue = VecDeque::from([((input.1), 64)]);
+    let mut dequeue = VecDeque::from([((input.1), 0)]);
 
     while let Some(((y, x), steps)) = dequeue.pop_front() {
-        if steps % 2 == 0 {
-            reachable.insert((y, x));
-        }
-        if steps == 0 {
+        if steps > max_steps || seen.contains(&(y, x)) {
             continue;
         }
 
+        if steps % 2 == max_steps % 2 {
+            reachable.insert((y, x));
+        }
+        seen.insert((y, x));
+
         for (new_y, new_x) in [(y + 1, x), (y, x + 1), (y - 1, x), (y, x - 1)] {
-            if new_y >= 0
-                && new_y < input.0.len() as i64
-                && new_x >= 0
-                && new_x < input.0[0].len() as i64
-                && input.0[new_y as usize][new_x as usize] != '#'
-                && !seen.contains(&(new_y, new_x))
-            {
-                seen.insert((new_y, new_x));
-                dequeue.push_back(((new_y, new_x), steps - 1));
+            if input.0[new_y as usize % input.0.len()][new_x as usize % input.0[0].len()] != '#' {
+                dequeue.push_back(((new_y, new_x), steps + 1));
             }
         }
     }
     reachable.len()
 }
 
+fn forward_divided(spots: Vec<usize>, goal_steps: usize, rows: usize) -> usize {
+    let y2 = (spots[2] - (spots[1] * 2) + spots[0]) / 2;
+    let y1 = spots[1] - spots[0] - y2;
+    let y0 = spots[0];
+
+    y0 + y1 * ((goal_steps - rows / 2) / rows) + y2 * ((goal_steps - rows / 2) / rows).pow(2)
+}
+
+#[aoc(day21, part1)]
+fn part1(input: &(Vec<Vec<char>>, (i64, i64))) -> usize {
+    calculate_spots(input, 64)
+}
+
 #[aoc(day21, part2)]
-fn part2(_input: &(Vec<Vec<char>>, (i64, i64))) -> usize {
-    todo!()
+fn part2(input: &(Vec<Vec<char>>, (i64, i64))) -> usize {
+    let goal_steps = 26501365;
+    let rows = input.0.len();
+    let edge = rows / 2;
+
+    let spots: Vec<usize> = [0, 1, 2]
+        .iter()
+        .map(|n| calculate_spots(input, n * rows + edge))
+        .collect();
+
+    forward_divided(spots, goal_steps, rows)
 }
 
 #[cfg(test)]

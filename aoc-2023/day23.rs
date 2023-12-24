@@ -1,5 +1,5 @@
-use std::{collections::HashSet, ops::Add};
 use aoc_runner_derive::{aoc, aoc_generator};
+use std::{collections::HashSet, ops::Add};
 
 #[derive(PartialEq, Eq, Hash, Clone, Copy, Debug)]
 struct Pos(i64, i64);
@@ -13,28 +13,37 @@ impl Add<char> for Pos {
             '<' => Pos(self.0, self.1 - 1),
             'v' => Pos(self.0 + 1, self.1),
             '>' => Pos(self.0, self.1 + 1),
-            _ => unreachable!()
+            _ => unreachable!(),
         }
     }
 }
 
 impl Pos {
-    fn successors(
-        &self,
-        trails: &Vec<Vec<char>>,
-        sliding: bool
-    ) -> Vec<Pos> {
+    fn successors(&self, trails: &Vec<Vec<char>>, sliding: bool) -> Vec<Pos> {
         const SLIDES: [char; 4] = ['^', '<', 'v', '>'];
 
         if sliding {
-            if let Some(slippery) = SLIDES.iter().position(|c| c == &trails[self.0 as usize][self.1 as usize]) {
+            if let Some(slippery) = SLIDES
+                .iter()
+                .position(|c| c == &trails[self.0 as usize][self.1 as usize])
+            {
                 return vec![*self + SLIDES[slippery]];
             }
         }
 
         let mut successors = vec![];
-        for p in [Pos(self.0 - 1, self.1), Pos(self.0, self.1 - 1), Pos(self.0 + 1, self.1), Pos(self.0, self.1 + 1)] {
-            if p.0 >= 0 && p.1 >= 0 && p.0 < trails.len() as i64 && p.1 < trails[0].len() as i64 && trails[p.0 as usize][p.1 as usize] != '#' {
+        for p in [
+            Pos(self.0 - 1, self.1),
+            Pos(self.0, self.1 - 1),
+            Pos(self.0 + 1, self.1),
+            Pos(self.0, self.1 + 1),
+        ] {
+            if p.0 >= 0
+                && p.1 >= 0
+                && p.0 < trails.len() as i64
+                && p.1 < trails[0].len() as i64
+                && trails[p.0 as usize][p.1 as usize] != '#'
+            {
                 successors.push(p);
             }
         }
@@ -44,12 +53,12 @@ impl Pos {
 
 fn dfs(start: Pos, path: &mut HashSet<Pos>, trails: &Vec<Vec<char>>, sliding: bool) -> usize {
     if start == Pos(trails.len() as i64 - 1, trails[0].len() as i64 - 2) {
-        return path.len()
+        return path.len();
     }
     let mut max = 0;
     for pos in start.successors(trails, sliding) {
         if path.insert(pos) {
-            max = max.max(dfs(pos.clone(), path, trails, sliding));
+            max = max.max(dfs(pos, path, trails, sliding));
             path.remove(&pos);
         }
     }
@@ -70,7 +79,6 @@ fn part1(input: &Vec<Vec<char>>) -> usize {
 fn part2(input: &Vec<Vec<char>>) -> usize {
     dfs(Pos(0, 1), &mut HashSet::new(), input, false)
 }
-
 
 #[cfg(test)]
 mod tests {
