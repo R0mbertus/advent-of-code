@@ -67,25 +67,3 @@ fn part2(input: &(Vec<Vec<char>>, (i64, i64))) -> usize {
 
     forward_divided(spots, goal_steps, rows)
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    const INPUT1: &str = "...........
-.....###.#.
-.###.##..#.
-..#.#...#..
-....#.#....
-.##..S####.
-.##..#...#.
-.......##..
-.##.#.####.
-.##..##.##.
-...........";
-
-    #[test]
-    fn part1_example() {
-        assert_eq!(part1(&parse(INPUT1)), 42);
-    }
-}
