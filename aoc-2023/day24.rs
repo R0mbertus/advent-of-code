@@ -1,7 +1,7 @@
 use aoc_runner_derive::{aoc, aoc_generator};
 use itertools::Itertools;
 use z3::{
-    ast::{self, Ast, Int},
+    ast::{Ast, Int},
     Config, Context, SatResult, Solver,
 };
 
