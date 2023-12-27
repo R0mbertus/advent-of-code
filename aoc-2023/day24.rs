@@ -1,5 +1,9 @@
 use aoc_runner_derive::{aoc, aoc_generator};
 use itertools::Itertools;
+use z3::{
+    ast::{self, Ast, Int},
+    Config, Context, SatResult, Solver,
+};
 
 struct Pos(i64, i64, i64);
 
@@ -35,6 +39,10 @@ fn parse(input: &str) -> Vec<Hailstone> {
         .collect()
 }
 
+fn to_z3(values: Vec<i64>, ctx: &Context) -> Vec<Int> {
+    values.iter().map(|el| Int::from_i64(ctx, *el)).collect()
+}
+
 #[aoc(day24, part1)]
 fn part1(input: &[Hailstone]) -> usize {
     let (xy_min, xy_max) = (200000000000000i64, 400000000000000i64);
@@ -67,6 +75,50 @@ fn part1(input: &[Hailstone]) -> usize {
 }
 
 #[aoc(day24, part2)]
-fn part2(_input: &[Hailstone]) -> usize {
-    todo!()
+fn part2(input: &[Hailstone]) -> u64 {
+    let ctx = Context::new(&Config::new());
+    let solver = Solver::new(&ctx);
+    let stone_z3 = ["sx", "sy", "sz", "sdx", "sdy", "sdz"]
+        .iter()
+        .map(|el| Int::new_const(&ctx, *el))
+        .collect::<Vec<Int>>();
+
+    for (i, hailstone) in input.iter().take(3).enumerate() {
+        let hailstone_z3 = to_z3(
+            Vec::from([
+                hailstone.pos.0,
+                hailstone.pos.1,
+                hailstone.pos.2,
+                hailstone.vel.0,
+                hailstone.vel.1,
+                hailstone.vel.2,
+            ]),
+            &ctx,
+        );
+
+        let time = Int::new_const(&ctx, format!("time{i}"));
+        solver.assert(&time.gt(&Int::from_i64(&ctx, 0)));
+        solver.assert(
+            &(&stone_z3[0] + &stone_z3[3] * &time)
+                ._eq(&(&hailstone_z3[0] + &hailstone_z3[3] * &time)),
+        );
+        solver.assert(
+            &(&stone_z3[1] + &stone_z3[4] * &time)
+                ._eq(&(&hailstone_z3[1] + &hailstone_z3[4] * &time)),
+        );
+        solver.assert(
+            &(&stone_z3[2] + &stone_z3[5] * &time)
+                ._eq(&(&hailstone_z3[2] + &hailstone_z3[5] * &time)),
+        );
+    }
+
+    assert_eq!(solver.check(), SatResult::Sat);
+    let res = solver
+        .get_model()
+        .unwrap()
+        .eval(&(&stone_z3[0] + &stone_z3[1] + &stone_z3[2]), true)
+        .unwrap()
+        .as_u64()
+        .unwrap();
+    res
 }
