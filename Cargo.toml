@@ -17,4 +17,4 @@ num-integer = "0.1.45"
 array2d = "0.3.0"
 indexmap = "2.1.0"
 pathfinding = "4.6.0"
-z3 = { version = "0.12", features = ["static-link-z3"] }
+# z3 = { version = "0.12", features = ["static-link-z3"] }

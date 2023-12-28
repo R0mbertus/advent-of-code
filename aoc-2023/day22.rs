@@ -27,17 +27,11 @@ impl Brick {
         let point_in_range = |p, range: (usize, usize)| p >= range.0 && p <= range.1;
 
         (point_in_range(self.bottom_end.2, (other.bottom_end.2, other.top_end.2))
-            || point_in_range(self.top_end.2, (other.bottom_end.2, other.top_end.2))
-            || point_in_range(other.bottom_end.2, (self.bottom_end.2, self.top_end.2))
-            || point_in_range(other.top_end.2, (self.bottom_end.2, self.top_end.2)))
+            || point_in_range(self.top_end.2, (other.bottom_end.2, other.top_end.2)))
             && (point_in_range(self.bottom_end.0, (other.bottom_end.0, other.top_end.0))
-                || point_in_range(self.top_end.0, (other.bottom_end.0, other.top_end.0))
-                || point_in_range(other.bottom_end.0, (self.bottom_end.0, self.top_end.0))
-                || point_in_range(other.top_end.0, (self.bottom_end.0, self.top_end.0)))
+                || point_in_range(self.top_end.0, (other.bottom_end.0, other.top_end.0)))
             && (point_in_range(self.bottom_end.1, (other.bottom_end.1, other.top_end.1))
-                || point_in_range(self.top_end.1, (other.bottom_end.1, other.top_end.1))
-                || point_in_range(other.bottom_end.1, (self.bottom_end.1, self.top_end.1))
-                || point_in_range(other.top_end.1, (self.bottom_end.1, self.top_end.1)))
+                || point_in_range(self.top_end.1, (other.bottom_end.1, other.top_end.1)))
     }
 }
 
@@ -79,7 +73,7 @@ fn drop_bricks(
             let collisions: Vec<Brick> = dropped
                 .clone()
                 .into_iter()
-                .filter(|b| falling.collision(b))
+                .filter(|b| falling.collision(b) || b.collision(&falling))
                 .collect();
             if !collisions.is_empty() {
                 falling.add(1);
