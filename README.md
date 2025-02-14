@@ -1,6 +1,6 @@
-# Advent of Code 2023
+# Advent of Code 2024
 
-My solutions to the [Advent of Code 2023](https://adventofcode.com/2023) done in Rust, again.
+My solutions to the [Advent of Code 2024](https://adventofcode.com/2024) done in Rust, again (again).
 
 ## Running
 
