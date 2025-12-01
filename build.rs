@@ -16,7 +16,7 @@ fn create_module() -> std::io::Result<()> {
     let mut file = fs::File::create(&dest)?;
     file.write_all(
         format!(
-            "use aoc_runner_derive::aoc_lib;\n\n{}\naoc_lib! {{ year = 2024 }}\n",
+            "use aoc_runner_derive::aoc_lib;\n\n{}\naoc_lib! {{ year = 2025 }}\n",
             entries.join("")
         )
         .as_bytes(),

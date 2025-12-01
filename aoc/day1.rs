@@ -1,63 +1,67 @@
 use aoc_runner_derive::{aoc, aoc_generator};
-use std::{cmp, collections::HashMap};
 
 #[aoc_generator(day1)]
-fn parse1(input: &str) -> (Vec<u32>, Vec<u32>) {
+fn parse1(input: &str) -> Vec<(String, i64)> {
     input
         .lines()
         .map(|l| {
-            let nums = l
-                .split_whitespace()
-                .map(|i| i.parse::<u32>().unwrap())
-                .collect::<Vec<u32>>();
-            (nums[0], nums[1])
+            let (dir, count) = l.split_at(1);
+            (dir.to_string(), count.parse().unwrap())
         })
-        .unzip()
+        .collect()
 }
 
 #[aoc(day1, part1)]
-fn part1(input: &(Vec<u32>, Vec<u32>)) -> u32 {
-    let mut list1 = input.0.to_owned();
-    let mut list2 = input.1.to_owned();
-
-    list1.sort();
-    list2.sort();
-
-    list1
-        .iter()
-        .zip(list2)
-        .map(|(e1, e2)| cmp::max(e1, &e2) - cmp::min(e1, &e2))
-        .sum()
+fn part1(input: &[(String, i64)]) -> i64 {
+    let mut count_zero = 0;
+    input.iter().fold(50, |v, (dir, count)| {
+        let value = (v + (count * if dir == "R" { 1 } else { -1 })).rem_euclid(100);
+        count_zero += (value == 0) as i64;
+        value
+    });
+    count_zero
 }
 
 #[aoc(day1, part2)]
-fn part2(input: &(Vec<u32>, Vec<u32>)) -> u32 {
-    let mut m: HashMap<u32, u32> = HashMap::new();
-    for e in input.1.iter().copied() {
-        *m.entry(e).or_default() += 1;
-    }
-
-    input.0.iter().map(|e| m.get(e).unwrap_or(&0) * e).sum()
+fn part2(input: &[(String, i64)]) -> i64 {
+    let mut count_zero = 0;
+    input.iter().fold(50, |v, (dir, count)| {
+        count_zero += *count / 100;
+        let count_rem = count % 100;
+        let dir_num = if dir == "R" { 1 } else { -1 };
+        let value = v + (count_rem * dir_num);
+        if dir_num == 1 {
+            count_zero += (value >= 100) as i64;
+        } else {
+            count_zero += ((value <= 0) && (v != 0)) as i64;
+        }
+        value.rem_euclid(100)
+    });
+    count_zero
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    const INPUT: &str = "3   4
-4   3
-2   5
-1   3
-3   9
-3   3";
+    const INPUT: &str = "L68
+L30
+R48
+L5
+R60
+L55
+L1
+L99
+R14
+L82";
 
     #[test]
     fn part1_example() {
-        assert_eq!(part1(&&parse1(INPUT)), 11);
+        assert_eq!(part1(&&parse1(INPUT)), 3);
     }
 
     #[test]
     fn part2_example() {
-        assert_eq!(part2(&&parse1(INPUT)), 31);
+        assert_eq!(part2(&&parse1(INPUT)), 6);
     }
 }
